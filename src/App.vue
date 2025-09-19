@@ -1,7 +1,16 @@
 <script setup lang="ts"></script>
 
 <template>
-  <RouterView />
+  <div class="app-wrapper">
+    <RouterView />
+  </div>
 </template>
 
-<!-- <style scoped></style> -->
+<style lang="scss" scoped>
+.app-wrapper {
+  border-radius: 6px;
+  width: 1024px;
+  height: 768px;
+  overflow: hidden;
+}
+</style>
