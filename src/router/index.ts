@@ -1,8 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createMemoryHistory } from 'vue-router'
+
+import HomeScreen from '@/views/HomeScreen.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [],
+  history: createMemoryHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      component: HomeScreen,
+    },
+  ],
 })
 
 export default router

@@ -1,3 +1,8 @@
+import 'nes.css/css/nes.min.css'
+import 'vue-final-modal/style.css'
+import '@/assets/css/main.css'
+import '@/assets/scss/main.scss'
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
