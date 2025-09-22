@@ -1,7 +1,6 @@
 import { createRouter, createMemoryHistory } from 'vue-router'
 
 import HomeScreen from '@/views/HomeScreen.vue'
-import FinalScreen from '@/views/FinalScreen.vue'
 
 const router = createRouter({
   history: createMemoryHistory(import.meta.env.BASE_URL),
@@ -12,7 +11,10 @@ const router = createRouter({
     },
     {
       path: '/final',
-      component: FinalScreen,
+      components: {
+        default: () => import('@/views/FinalScreen.vue'),
+        dashboard: () => import('@/components/GameDashboard.vue'),
+      },
     },
   ],
 })
