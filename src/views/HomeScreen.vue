@@ -5,6 +5,10 @@ import Typed from 'typed.js'
 
 const textRef = ref<HTMLElement | null>(null)
 
+const handleStart = () => {
+  router.push('/final')
+}
+
 onMounted(() => {
   new Typed(textRef.value, {
     strings: [
@@ -21,7 +25,7 @@ onMounted(() => {
     <div class="home-screen__text-container nes-container is-dark">
       <p ref="textRef" class="home-screen__text"></p>
       <div class="home-screen__actions">
-        <button class="nes-btn" type="button" @click="router.push('/final')">
+        <button class="nes-btn" type="button" @click="handleStart">
           Начать игру
         </button>
       </div>
