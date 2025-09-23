@@ -2,6 +2,9 @@
 
 ![Превью](https://github.com/alexbulanovgoodmail/the-good-the-bad-and-the-ugly/blob/main/Preview.png?raw=true)
 
+[Играть](https://stellular-dragon-2ea62f.netlify.app)
+
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
