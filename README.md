@@ -1,5 +1,7 @@
 # the-good-the-bad-and-the-ugly
 
+![Превью](https://github.com/alexbulanovgoodmail/the-good-the-bad-and-the-ugly/blob/main/Preview.png?raw=true)
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
