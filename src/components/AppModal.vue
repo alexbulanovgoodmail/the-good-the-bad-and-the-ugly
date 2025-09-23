@@ -160,9 +160,9 @@ const handleClosed = (): void => {
     }
   }
 
-  &__slot {
-    text-align: center;
-  }
+  // &__slot {
+  //   text-align: center;
+  // }
 
   &:has(.always-on-top) &__close {
     display: none;
@@ -171,20 +171,6 @@ const handleClosed = (): void => {
   &:has(.always-on-top) &__content {
     max-width: calc(1280px - 64px);
   }
-
-  /*
-		&__content.without-content {
-			min-height: 100px;
-
-			@media screen and (min-width: $sm) {
-				min-height: 150px;
-			}
-
-			@media screen and (min-width: $lg) {
-				min-height: 300px;
-			}
-		}
-	*/
 
   &__content.always-on-top {
     border-radius: 0;

@@ -12,10 +12,6 @@ import youWinSound from '@/assets/sounds/sound-win.mp3'
 import youDeadSound from '@/assets/sounds/sound-lose.mp3'
 import youFailSound from '@/assets/sounds/sound-fail.mp3'
 
-import youWinImg from '@/assets/images/win-01.webp'
-import youDeadImg from '@/assets/images/lose-01.webp'
-import youFailImg from '@/assets/images/lose-02.webp'
-
 import banditDefaultImg from '@/assets/images/boss-01.webp'
 import banditWinImg from '@/assets/images/boss-02.webp'
 import banditDeadImg from '@/assets/images/boss-03.webp'
@@ -31,14 +27,8 @@ const sounds = {
 
 const titles = {
   [GameOverStatus.WIN]: 'Самая быстрая рука в городе.',
-  [GameOverStatus.DEAD]: 'Твоя последняя схватка',
-  [GameOverStatus.LOSE]: 'Торопливость сгубила тебя.',
-}
-
-const images = {
-  [GameOverStatus.WIN]: youWinImg,
-  [GameOverStatus.DEAD]: youDeadImg,
-  [GameOverStatus.LOSE]: youFailImg,
+  [GameOverStatus.DEAD]: 'Твоя последняя схватка.',
+  [GameOverStatus.LOSE]: 'Руки дрогнули слишком рано.',
 }
 
 const SHOT_TIMEOUT = 600
@@ -94,15 +84,13 @@ const handleGameOver = (result: GameOverStatus) => {
 
   const audio = new Audio(sounds[result])
   audio.currentTime = 0
+  audio.play().catch(() => {})
 
   setTimeout(() => {
-    audio.play().catch(() => {})
-
     openModal({
       component: GameDialog,
       componentProps: {
         text: titles[result],
-        image: images[result],
         textQuit: 'Выйти',
         onQuit: async () => {
           await closeAll()
@@ -137,7 +125,7 @@ onMounted(() => {
   openModal({
     component: GameDialog,
     componentProps: {
-      text: 'Музыка стихнет — стреляй первым. Ошибки не прощаются.',
+      text: 'Музыка стихнет — стреляй первым.',
       textStart: 'Начать',
       onStart: handleStart,
     },
@@ -185,8 +173,6 @@ onBeforeUnmount(() => {
   width: 180px;
   height: 180px;
   transform: translate(-50%, 0);
-
-  // background-image: url('@/assets/images/boss-01.webp');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
