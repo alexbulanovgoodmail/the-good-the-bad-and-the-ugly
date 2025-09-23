@@ -5,8 +5,9 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useDialog } from '@/composables/useDialog'
 import { storeGame } from '@/stores/storeGame'
 import GameDialog from '@/components/GameDialog.vue'
+
 import finalSound from '@/assets/sounds/cut.mp3'
-import shotBanditSoundUrl from '@/assets/sounds/shot-02.mp3'
+import shotBanditSound from '@/assets/sounds/shot-02.mp3'
 
 import youWinSound from '@/assets/sounds/sound-win.mp3'
 import youDeadSound from '@/assets/sounds/sound-lose.mp3'
@@ -17,7 +18,7 @@ import banditWinImg from '@/assets/images/boss-02.webp'
 import banditDeadImg from '@/assets/images/boss-03.webp'
 
 const game = storeGame()
-const { shot } = game
+const { shot, rebootClip, rewardForKill } = game
 
 const sounds = {
   [GameOverStatus.WIN]: youWinSound,
@@ -31,9 +32,10 @@ const titles = {
   [GameOverStatus.LOSE]: 'Руки дрогнули слишком рано.',
 }
 
+const REWARD = 10000
 const SHOT_TIMEOUT = 600
 const musicTimerAudio = new Audio(finalSound)
-const shotBanditAudio = new Audio(shotBanditSoundUrl)
+const shotBanditAudio = new Audio(shotBanditSound)
 musicTimerAudio.currentTime = 0
 shotBanditAudio.currentTime = 0
 
@@ -58,6 +60,8 @@ musicTimerAudio.addEventListener('ended', () => {
     if (!hasHitBandit.value) {
       shotBanditAudio.play()
       banditImgUrl.value = banditWinImg
+
+      areaRef.value?.classList.add('is-dead')
       handleGameOver(GameOverStatus.DEAD)
     }
   }, SHOT_TIMEOUT)
@@ -113,6 +117,7 @@ const handleClick = (event: Event) => {
     const target = event.target as HTMLElement
 
     if (target.closest('.damage-area')) {
+      rewardForKill(REWARD)
       hasHitBandit.value = true
       banditImgUrl.value = banditDeadImg
       clearTimeout(shotTimer.value!)
@@ -121,7 +126,10 @@ const handleClick = (event: Event) => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  rebootClip()
+  await closeAll()
+
   openModal({
     component: GameDialog,
     componentProps: {
@@ -164,6 +172,17 @@ onBeforeUnmount(() => {
   cursor:
     url('@/assets/images/crosshair.svg') 16 16,
     auto;
+
+  &.is-dead::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #f00, $alpha: 40%);
+  }
 }
 
 .bandit {

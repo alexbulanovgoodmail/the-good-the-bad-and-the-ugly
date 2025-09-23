@@ -6,7 +6,7 @@ import Typed from 'typed.js'
 const textRef = ref<HTMLElement | null>(null)
 
 const handleStart = () => {
-  router.push('/final')
+  router.push('/saloon')
 }
 
 onMounted(() => {

@@ -10,6 +10,13 @@ const router = createRouter({
       component: HomeScreen,
     },
     {
+      path: '/saloon',
+      components: {
+        default: () => import('@/views/SaloonScreen.vue'),
+        dashboard: () => import('@/components/GameDashboard.vue'),
+      },
+    },
+    {
       path: '/final',
       components: {
         default: () => import('@/views/FinalScreen.vue'),
