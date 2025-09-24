@@ -58,7 +58,7 @@ musicTimerAudio.addEventListener('ended', () => {
 
   shotTimer.value = setTimeout(() => {
     if (!hasHitBandit.value) {
-      shotBanditAudio.play()
+      shotBanditAudio.play().catch(() => {})
       banditImgUrl.value = banditWinImg
 
       areaRef.value?.classList.add('is-dead')

@@ -3,9 +3,15 @@ import { ref, onMounted } from 'vue'
 import router from '@/router'
 import Typed from 'typed.js'
 
+import enterSound from '@/assets/sounds/sound-enter.mp3'
+
+const musicEnterAudio = new Audio(enterSound)
+musicEnterAudio.currentTime = 0
+
 const textRef = ref<HTMLElement | null>(null)
 
 const handleStart = () => {
+  musicEnterAudio.play().catch(() => {})
   router.push('/saloon')
 }
 
